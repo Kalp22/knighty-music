@@ -20,6 +20,8 @@ export interface SearchResult {
   resultType: string;
   videoId?: string;
   title?: string;
+  subscribers?: string;
+  artist?: string;
   thumbnails: Thumbnail[];
   album?: Album;
   inLibrary?: boolean;
