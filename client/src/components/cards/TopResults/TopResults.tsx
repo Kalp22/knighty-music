@@ -16,28 +16,28 @@ export default function TopResults({ key, item }: TopResultsProps) {
   return (
     <div
       key={key}
-      className="flex flex-row w-[40rem] items-center justify-between px-4 py-6 shadow-md bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+      className="flex flex-row w-[60rem] h-40 items-center justify-between px-4 py-6 shadow-md bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
       onClick={() => router.push(`/song/${item.videoId}`)}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="flex flex-row gap-4 items-center">
+      <div className="flex flex-row gap-3 items-center">
         {item.thumbnails && item.thumbnails[0] && (
           <Image
             src={item.thumbnails[0].url}
             alt={item.title || ""}
-            width={item.thumbnails[0].width || 150}
-            height={item.thumbnails[0].height || 150}
+            width={item.thumbnails[0].width || 60}
+            height={item.thumbnails[0].height || 60}
             className={`${
               item.resultType === "artist" ? "rounded-full" : "rounded"
             } mb-2`}
           />
         )}
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           {item.title ? (
-            <div className="text-xl">{item.title}</div>
+            <div className="text-2xl">{item.title}</div>
           ) : (
-            <div className="text-xl">
+            <div className="text-2xl">
               {item.artists !== undefined &&
                 item.artists?.length !== 0 &&
                 item.artists[0].name}
@@ -48,7 +48,7 @@ export default function TopResults({ key, item }: TopResultsProps) {
             {item.artists !== undefined &&
               item.artists?.length !== 0 &&
               item.resultType !== "artist" && (
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-400">
                   <span className="ml-1"> • </span>
                   {item.artists.map((artist: Artist, index: number) => (
                     <span key={index}>
@@ -63,27 +63,20 @@ export default function TopResults({ key, item }: TopResultsProps) {
                 </div>
               )}
             {item.subscribers && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-400">
                 <span className="ml-1"> • </span>
                 {item.subscribers}
                 <span> subscribers</span>
               </div>
             )}
             {item.album && item.album.name && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-400">
                 <span className="ml-1"> • </span>
                 {item.album.name}
               </div>
             )}
-            {item.duration && (
-              <div className="text-sm text-gray-500">
-                <span className="ml-1"> • </span>
-                {item.duration}
-                <span> min</span>
-              </div>
-            )}
             {item.views && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-400">
                 <span className="ml-1"> • </span>
                 {item.views}
                 <span> views</span>
@@ -93,7 +86,7 @@ export default function TopResults({ key, item }: TopResultsProps) {
         </div>
       </div>
       <IoPlayCircleOutline
-        size={45}
+        size={55}
         className={`${hovered ? "block" : "hidden"} mr-2`}
       />
     </div>

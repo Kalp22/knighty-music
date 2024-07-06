@@ -24,14 +24,14 @@ const CategorizedSearchResults: React.FC<CategorizedSearchResultsProps> = ({
   const categorizedResults = categorizeResults(results);
 
   return (
-    <div className="mt-4">
+    <>
       {Object.entries(categorizedResults).map(
         ([category, items]) =>
           category !== "Profiles" &&
           items.length > 0 &&
           renderResults(category, items)
       )}
-    </div>
+    </>
   );
 };
 

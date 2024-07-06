@@ -43,7 +43,7 @@ export default function SearchPage({
   return (
     <div className="bg-gray-10">
       <Topbar />
-      <div className="container h-[92dvh] mx-80 p-4">
+      <div className="container h-[92dvh] mx-80 p-4 w-[60rem]">
         <h1 className="text-3xl font-bold mb-4">Search Results</h1>
         <p className="text-lg mb-8">
           Showing results for <span className="font-semibold">{query}</span>{" "}

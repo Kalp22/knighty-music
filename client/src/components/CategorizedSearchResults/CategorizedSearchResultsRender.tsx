@@ -1,6 +1,7 @@
 import { SearchResult } from "@/app/types";
 import TopResults from "../cards/TopResults/TopResults";
 import SongResults from "../cards/SongResults/SongResults";
+import ArtAlbumResults from "../cards/ArtAlbumResults/ArtAlbumResults";
 
 const renderResults = (category: string, items: SearchResult[]) => {
   return (
@@ -15,11 +16,36 @@ const renderResults = (category: string, items: SearchResult[]) => {
       >
         {items[0].category !== "Top result" ? (
           <>
-            {category === "Songs" && (
+            {category === "Songs" ? (
+              items.map((item, i) => (
+                <SongResults key={item.videoId || i} item={item} />
+              ))
+            ) : (
               <>
-                {items.map((item, i) => (
-                  <SongResults key={item.videoId || i} item={item} />
-                ))}
+                {category === "Artists" && (
+                  <>
+                    {items.map((item, i) => (
+                      <ArtAlbumResults
+                        key={item.videoId || i}
+                        item={item}
+                        cat={true}
+                      />
+                    ))}
+                    <ArtAlbumResults key={4} item={undefined} cat={true} />
+                  </>
+                )}
+                {category === "Albums" && (
+                  <>
+                    {items.map((item, i) => (
+                      <ArtAlbumResults
+                        key={item.videoId || i}
+                        item={item}
+                        cat={false}
+                      />
+                    ))}
+                    <ArtAlbumResults key={4} item={undefined} cat={false} />
+                  </>
+                )}
               </>
             )}
           </>
