@@ -14,6 +14,7 @@ export default function SearchPage({
   const filter = id.split("&filter=")[1];
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(true);
+  console.log(results);
 
   useEffect(() => {
     const fetchData = async () => {

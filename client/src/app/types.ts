@@ -1,3 +1,5 @@
+import Home from "./page";
+
 // types.ts
 export interface Thumbnail {
   url: string;
@@ -39,4 +41,18 @@ export interface SearchResult {
   itemCount?: number;
   author?: string;
   browseId?: string;
+}
+
+export interface HomeResponse {
+  title: string;
+  album?: Album;
+  artists?: Artist[];
+  isExplicit: boolean;
+  thumbnails: Thumbnail[];
+  videoId?: string;
+}
+
+export interface HomeData {
+  title: string;
+  contents: HomeResponse[];
 }

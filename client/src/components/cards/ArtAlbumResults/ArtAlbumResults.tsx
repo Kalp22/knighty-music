@@ -16,7 +16,6 @@ export default function ArtAlbumResults({
   cat,
 }: ArtAlbumResultsProps) {
   const router = useRouter();
-  console.log(item?.resultType === "playlist" ? item : item?.artists);
   return (
     <>
       {item === undefined ? (
