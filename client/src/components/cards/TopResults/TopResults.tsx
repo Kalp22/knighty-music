@@ -16,7 +16,7 @@ export default function TopResults({ key, item }: TopResultsProps) {
   return (
     <div
       key={key}
-      className="flex flex-row w-[60rem] h-40 items-center justify-between px-4 py-6 shadow-md bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+      className="flex flex-row w-[55rem] h-40 items-center justify-between px-4 py-6 shadow-md bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
       onClick={() => router.push(`/song/${item.videoId}`)}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

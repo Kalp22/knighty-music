@@ -28,10 +28,10 @@ const renderResults = (category: string, items: SearchResult[]) => {
                       <ArtAlbumResults
                         key={item.videoId || i}
                         item={item}
-                        cat={true}
+                        cat={category}
                       />
                     ))}
-                    <ArtAlbumResults key={4} item={undefined} cat={true} />
+                    <ArtAlbumResults key={4} item={undefined} cat={category} />
                   </>
                 )}
                 {category === "Albums" && (
@@ -40,10 +40,28 @@ const renderResults = (category: string, items: SearchResult[]) => {
                       <ArtAlbumResults
                         key={item.videoId || i}
                         item={item}
-                        cat={false}
+                        cat={category}
                       />
                     ))}
-                    <ArtAlbumResults key={4} item={undefined} cat={false} />
+                    <ArtAlbumResults key={4} item={undefined} cat={category} />
+                  </>
+                )}
+                {(category === "Playlists" ||
+                  category === "Featured playlists" ||
+                  category === "Community playlists") && (
+                  <>
+                    {items.map((item, i) => (
+                      <ArtAlbumResults
+                        key={item.videoId || i}
+                        item={item}
+                        cat={"Playlists"}
+                      />
+                    ))}
+                    <ArtAlbumResults
+                      key={4}
+                      item={undefined}
+                      cat={"Playlists"}
+                    />
                   </>
                 )}
               </>

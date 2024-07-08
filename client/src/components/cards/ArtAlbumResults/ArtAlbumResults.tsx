@@ -7,7 +7,7 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 interface ArtAlbumResultsProps {
   key: string | number;
   item: SearchResult | undefined;
-  cat: boolean;
+  cat: string;
 }
 
 export default function ArtAlbumResults({
@@ -16,30 +16,36 @@ export default function ArtAlbumResults({
   cat,
 }: ArtAlbumResultsProps) {
   const router = useRouter();
-  console.log(item?.resultType === "album" ? item : "artist");
+  console.log(item?.resultType === "playlist" ? item : item?.artists);
   return (
     <>
       {item === undefined ? (
         <div
           key={key}
-          className="flex flex-col gap-6 items-center p-2 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+          className={`flex flex-col gap-6 items-center p-2 ${
+            cat === "Artists" ? "rounded-3xl" : "rounded-lg"
+          } shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200`}
         >
           <IoArrowForwardCircleOutline size={70} className="text-gray-400" />
-          <div className="text-lg ">See more {cat ? "Artists" : "Albums"}</div>
+          <div className="text-lg ">See more {cat}</div>
         </div>
       ) : (
         <div
           key={key}
-          className="flex flex-col gap-2 items-center text-center p-2 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+          className={`flex flex-col gap-6 items-center p-2 ${
+            cat === "Artists" ? "rounded-3xl" : "rounded-lg"
+          } shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200`}
           onClick={() => router.push(`/song/${item.videoId}`)}
         >
           {item.thumbnails && item.thumbnails[0] && (
             <Image
               src={item.thumbnails[0].url}
               alt={item.title || ""}
-              width={cat ? 100 : 70}
-              height={cat ? 100 : 70}
-              className={`${cat ? "rounded-full" : "rounded"} mb-2`}
+              width={cat === "Artists" ? 100 : 70}
+              height={cat === "Artists" ? 100 : 70}
+              className={`${
+                cat === "Artists" ? "rounded-full" : "rounded"
+              } mb-2`}
             />
           )}
           <div>
@@ -49,7 +55,8 @@ export default function ArtAlbumResults({
               <div className="text-lg">{item.artist && item.artist}</div>
             )}
             <div>
-              {item.artists !== undefined &&
+              {cat === "Album" ? (
+                item.artists !== undefined &&
                 item.artists?.length !== 0 &&
                 item.resultType !== "artist" && (
                   <div className="text-sm text-gray-400">
@@ -69,7 +76,12 @@ export default function ArtAlbumResults({
                         )
                     )}
                   </div>
-                )}
+                )
+              ) : (
+                <div className="text-sm text-gray-400">
+                  {item.author && item.author}
+                </div>
+              )}
             </div>
           </div>
         </div>
