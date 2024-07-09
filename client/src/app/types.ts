@@ -1,6 +1,3 @@
-import Home from "./page";
-
-// types.ts
 export interface Thumbnail {
   url: string;
   width: number;
@@ -54,5 +51,5 @@ export interface HomeResponse {
 
 export interface HomeData {
   title: string;
-  contents: HomeResponse[];
+  contents: HomeResponse[] | null;
 }

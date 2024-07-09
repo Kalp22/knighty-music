@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { HomeData } from "@/app/types";
+import ArtistComponent from "../ui/artist/artist";
 
 export default function homeRes() {
   const [data, setData] = useState<HomeData[]>([]);
@@ -35,29 +36,65 @@ export default function homeRes() {
         <p>Loading</p>
       ) : (
         <main className="flex min-h-screen flex-col">
-          <div className="container mx-80 p-4 w-[57rem]">
-            <h1 className="text-3xl font-bold mb-4">Home</h1>
-            <div className="grid grid-cols-3 gap-4">
-              {data.map((homeData) => (
-                <div key={homeData.title}>
-                  <h2 className="text-2xl font-bold">{homeData.title}</h2>
+          <div className="container mx-60">
+            <div className="grid grid-rows-3">
+              {data.map((homeData, i) => (
+                <div
+                  className={`${i == 0 ? "pt-10" : "pt-14"}`}
+                  key={homeData.title}
+                >
+                  <h2 className="text-5xl font-bold mb-12">{homeData.title}</h2>
                   <div className="grid grid-cols-3 gap-4">
-                    {homeData.contents && homeData.contents.length > 0 ? (
+                    {homeData.contents && homeData.contents.length > 1 ? (
                       homeData.contents.map((content) => (
-                        <div key={content.title && content.title}>
-                          {content.thumbnails && content.thumbnails[0] && (
-                            <Image
-                              src={content.thumbnails[0].url}
-                              alt={content.title || ""}
-                              width={content.thumbnails[0].width}
-                              height={content.thumbnails[0].height}
-                            />
+                        <div
+                          className="flex flex-row gap-4 p-4 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+                          key={content.title && content.title}
+                        >
+                          {content !== null && content.thumbnails && (
+                            <>
+                              {content.thumbnails[1] !== undefined ? (
+                                <Image
+                                  src={content.thumbnails[1].url}
+                                  alt={content.title || ""}
+                                  width={120}
+                                  height={120}
+                                />
+                              ) : (
+                                <Image
+                                  src={content.thumbnails[0].url}
+                                  alt={content.title || ""}
+                                  width={120}
+                                  height={120}
+                                />
+                              )}
+                            </>
                           )}
-                          <h3 className="text-lg font-bold">{content.title}</h3>
+                          <div className="flex flex-col gap-2">
+                            <h3 className="text-2xl font-bold">
+                              {content.title}
+                            </h3>
+                            <p>
+                              {content.album && content.album.name && (
+                                <div className="text-sm text-gray-400">
+                                  {content.album.name}
+                                  <span className="ml-1"> • </span>
+                                </div>
+                              )}
+                              {content.artists !== undefined &&
+                                content.artists?.length !== 0 &&
+                                content.artists !== null && (
+                                  <ArtistComponent
+                                    artists={content.artists}
+                                    range={2}
+                                  />
+                                )}
+                            </p>
+                          </div>
                         </div>
                       ))
                     ) : (
-                      <p>No content available</p>
+                      <></>
                     )}
                   </div>
                 </div>

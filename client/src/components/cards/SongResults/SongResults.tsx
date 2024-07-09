@@ -29,32 +29,34 @@ export default function SongResults({ key, item }: SongResultsProps) {
           />
         )}
         <div>
-        {item.title && item.resultType !== "artist" ? (
-          <div className="text-lg ">{item.title}</div>
-        ) : (
-          <div className="text-lg ">{item.artist && item.artist}</div>
-        )}
-        <div className="flex flex-row items-center">
-          {item.artists !== undefined &&
-            item.artists?.length !== 0 &&
-            item.resultType !== "artist" && (
+          {item.title && item.resultType !== "artist" ? (
+            <div className="text-lg ">{item.title}</div>
+          ) : (
+            <div className="text-lg ">{item.artist && item.artist}</div>
+          )}
+          <div className="flex flex-row items-center">
+            {item.artists !== undefined &&
+              item.artists?.length !== 0 &&
+              item.resultType !== "artist" && (
+                <div className="text-sm text-gray-400">
+                  {item.artists.map((artist: Artist, index: number) => (
+                    <span key={index}>
+                      {artist.name}
+                      {index <
+                        (item.artists !== undefined
+                          ? item.artists?.length
+                          : 0) -
+                          1 && ", "}
+                    </span>
+                  ))}
+                </div>
+              )}
+            {item.album && item.album.name && (
               <div className="text-sm text-gray-400">
-                {item.artists.map((artist: Artist, index: number) => (
-                  <span key={index}>
-                    {artist.name}
-                    {index <
-                      (item.artists !== undefined ? item.artists?.length : 0) -
-                        1 && ", "}
-                  </span>
-                ))}
+                <span className="ml-1"> • </span>
+                {item.album.name}
               </div>
             )}
-          {item.album && item.album.name && (
-            <div className="text-sm text-gray-400">
-              <span className="ml-1"> • </span>
-              {item.album.name}
-            </div>
-          )}
           </div>
         </div>
       </div>
