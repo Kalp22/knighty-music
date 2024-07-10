@@ -1,12 +1,16 @@
+// components/Bottombar.tsx
 "use client";
 import { useState } from "react";
+import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 export default function Bottombar() {
   const [hoverToggle, setHovering] = useState(false);
+  const { videoId } = useVideo();
 
   const Hovering = (y: Boolean) => {
     y ? setHovering(true) : setHovering(false);
   };
+
   return (
     <footer className="flex fixed bottom-0 w-screen h-20 z-10 bg-black">
       <section className="flex w-full h-[5px] flex-row items-center">
@@ -22,6 +26,7 @@ export default function Bottombar() {
           } bg-blue-700 transition-all z-20`}
         ></div>
       </section>
+      {videoId && <div>Now playing video ID: {videoId}</div>}
     </footer>
   );
 }

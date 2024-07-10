@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import { Artist } from "@/app/types";
 import { SearchResult } from "@/app/types";
+import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 interface TopResultsProps {
   key: string | number;
@@ -11,13 +11,13 @@ interface TopResultsProps {
 }
 
 export default function TopResults({ key, item }: TopResultsProps) {
-  const router = useRouter();
+  const { setVideoId } = useVideo();
   const [hovered, setHovered] = useState(false);
   return (
     <div
       key={key}
       className="flex flex-row w-[55rem] h-40 items-center justify-between px-4 py-6 shadow-md bg-gray-800 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
-      onClick={() => router.push(`/song/${item.videoId}`)}
+      onClick={() => setVideoId(item.videoId || "")}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >

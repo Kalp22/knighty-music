@@ -1,13 +1,13 @@
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { SearchResult } from "../../app/types";
+import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 interface SearchResultProps {
   results: SearchResult[];
 }
 
 const SearchResultComponent: React.FC<SearchResultProps> = ({ results }) => {
-  const router = useRouter();
+  const { setVideoId } = useVideo();
   console.log(results[0]);
   return (
     <div className="absolute top-14 h-fit w-[550px] bg-stone-900 rounded-2xl">
@@ -18,7 +18,7 @@ const SearchResultComponent: React.FC<SearchResultProps> = ({ results }) => {
               <div
                 key={i}
                 className="flex items-center p-4 rounded-lg shadow-md hover:bg-gray-800 cursor-pointer transition-colors duration-200"
-                onClick={() => router.push(`/song/${result.videoId}`)}
+                onClick={() => setVideoId(result.videoId || "")}
               >
                 <Image
                   src={result.thumbnails ? result.thumbnails[0].url : ""}
@@ -46,7 +46,9 @@ const SearchResultComponent: React.FC<SearchResultProps> = ({ results }) => {
                           {result.artists?.map((artist, j) =>
                             j < 2
                               ? artist.name +
-                                (j < 1 && result.artists?.length > 1
+                                (j < 1 &&
+                                (result.artists ? result.artists?.length : 0) >
+                                  1
                                   ? ", "
                                   : "")
                               : ""

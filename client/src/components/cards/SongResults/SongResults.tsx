@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Artist } from "@/app/types";
 import { SearchResult } from "@/app/types";
-import { useRouter } from "next/navigation";
+import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 interface SongResultsProps {
   key: string | number;
@@ -9,12 +9,12 @@ interface SongResultsProps {
 }
 
 export default function SongResults({ key, item }: SongResultsProps) {
-  const router = useRouter();
+  const { setVideoId } = useVideo();
   return (
     <div
       key={key}
       className="flex flex-row justify-between items-center p-2 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200"
-      onClick={() => router.push(`/song/${item.videoId}`)}
+      onClick={() => setVideoId(item.videoId || "")}
     >
       <div className="flex flex-row gap-3 items-center">
         {item.thumbnails && item.thumbnails[0] && (
