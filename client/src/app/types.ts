@@ -14,6 +14,11 @@ export interface Album {
   id: string;
 }
 
+export interface StreamingData {
+  url: string;
+  title: string;
+}
+
 export interface SearchResult {
   category: string;
   resultType: string;
