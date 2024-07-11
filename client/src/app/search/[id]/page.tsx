@@ -2,7 +2,7 @@
 import Topbar from "@/components/topbar/topbar";
 import { useEffect, useState } from "react";
 import CategorizedSearchResults from "@/components/CategorizedSearchResults/CategorizedSearchResults";
-import { SearchResult } from "@/app/types";
+import { SearchResultProps } from "@/app/types";
 
 export default function SearchPage({
   params: { id },
@@ -12,7 +12,7 @@ export default function SearchPage({
   id = decodeURIComponent(id);
   const query = id.split("&filter=")[0];
   const filter = id.split("&filter=")[1];
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<SearchResultProps[]>([]);
   const [loading, setLoading] = useState(true);
   console.log(results);
 

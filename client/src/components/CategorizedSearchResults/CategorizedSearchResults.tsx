@@ -1,14 +1,14 @@
-import { SearchResult } from "@/app/types";
+import { SearchResultProps } from "@/app/types";
 import renderResults from "./CategorizedSearchResultsRender";
 
 interface CategorizedSearchResultsProps {
-  results: SearchResult[];
+  results: SearchResultProps[];
 }
 
 const CategorizedSearchResults: React.FC<CategorizedSearchResultsProps> = ({
   results,
 }) => {
-  const categorizeResults = (results: SearchResult[]) => {
+  const categorizeResults = (results: SearchResultProps[]) => {
     return results.reduce((acc, result) => {
       const category =
         result.category ||
@@ -18,7 +18,7 @@ const CategorizedSearchResults: React.FC<CategorizedSearchResultsProps> = ({
       }
       acc[category].push(result);
       return acc;
-    }, {} as Record<string, SearchResult[]>);
+    }, {} as Record<string, SearchResultProps[]>);
   };
 
   const categorizedResults = categorizeResults(results);

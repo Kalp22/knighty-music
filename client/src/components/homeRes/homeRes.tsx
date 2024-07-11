@@ -2,12 +2,12 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { HomeData } from "@/app/types";
+import { HomeDataProps } from "@/app/types";
 import ArtistComponent from "../ui/artist/artist";
 import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 export default function HomeRes() {
-  const [data, setData] = useState<HomeData[]>([]);
+  const [data, setData] = useState<HomeDataProps[]>([]);
   const [loading, setLoading] = useState(true);
   const { setVideoId } = useVideo();
 
@@ -40,15 +40,15 @@ export default function HomeRes() {
         <main className="flex min-h-screen flex-col">
           <div className="container mx-60">
             <div className="grid grid-rows-3">
-              {data.map((homeData, i) => (
+              {data.map((HomeDataProps, i) => (
                 <div
                   className={`${i == 0 ? "pt-10" : "pt-14"}`}
-                  key={homeData.title}
+                  key={HomeDataProps.title}
                 >
-                  <h2 className="text-5xl font-bold mb-12">{homeData.title}</h2>
+                  <h2 className="text-5xl font-bold mb-12">{HomeDataProps.title}</h2>
                   <div className="grid grid-cols-3 gap-4">
-                    {homeData?.contents && homeData.contents.length > 1
-                      ? homeData.contents.map((content) =>
+                    {HomeDataProps?.contents && HomeDataProps.contents.length > 1
+                      ? HomeDataProps.contents.map((content) =>
                           content ? (
                             <div
                               className="flex flex-row gap-4 p-4 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer transition-colors duration-200"

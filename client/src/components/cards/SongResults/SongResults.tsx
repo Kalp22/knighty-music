@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Artist } from "@/app/types";
-import { SearchResult } from "@/app/types";
+import { ArtistProps } from "@/app/types";
+import { SearchResultProps } from "@/app/types";
 import { useVideo } from "@/app/contexts/videoContext/videoContext";
 
 interface SongResultsProps {
   key: string | number;
-  item: SearchResult;
+  item: SearchResultProps;
 }
 
 export default function SongResults({ key, item }: SongResultsProps) {
@@ -39,7 +39,7 @@ export default function SongResults({ key, item }: SongResultsProps) {
               item.artists?.length !== 0 &&
               item.resultType !== "artist" && (
                 <div className="text-sm text-gray-400">
-                  {item.artists.map((artist: Artist, index: number) => (
+                  {item.artists.map((artist: ArtistProps, index: number) => (
                     <span key={index}>
                       {artist.name}
                       {index <

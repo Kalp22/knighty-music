@@ -1,9 +1,9 @@
-import { SearchResult } from "@/app/types";
+import { SearchResultProps } from "@/app/types";
 import TopResults from "../cards/TopResults/TopResults";
 import SongResults from "../cards/SongResults/SongResults";
 import ArtAlbumResults from "../cards/ArtAlbumResults/ArtAlbumResults";
 
-const renderResults = (category: string, items: SearchResult[]) => {
+const renderResults = (category: string, items: SearchResultProps[]) => {
   return (
     <div className="mb-8" key={category}>
       <h2 className="text-2xl font-semibold mb-4">{category}</h2>

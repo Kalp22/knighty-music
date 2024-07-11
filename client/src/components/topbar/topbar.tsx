@@ -10,13 +10,13 @@ import { GiMusicSpell } from "react-icons/gi";
 import Darklight from "../ui/darklight/darklight";
 import SearchResultComponent from "../searchResults/searchResults";
 
-import { SearchResult } from "../../app/types";
+import { SearchResultProps } from "../../app/types";
 
 export default function Topbar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<SearchResultProps[]>([]);
 
   useEffect(() => {
     handleSearch(query);
@@ -36,7 +36,7 @@ export default function Topbar() {
           },
         }
       );
-      const data: SearchResult[] = await response.json();
+      const data: SearchResultProps[] = await response.json();
       setResults(data);
     } catch (error) {
       console.error("Error fetching search results:", error);

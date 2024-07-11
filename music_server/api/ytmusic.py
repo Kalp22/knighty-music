@@ -27,8 +27,4 @@ def get_album(album_id):
 
 def get_streaming_data(videoId):
     song_data = ytmusic.get_song(videoId)
-    streaming_data = {
-        'title': song_data['videoDetails']['title'],
-        'streaming_url': f"https://www.youtube.com/watch?v={videoId}"
-    }
-    return streaming_data
+    return song_data

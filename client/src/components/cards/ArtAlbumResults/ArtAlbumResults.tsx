@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Artist } from "@/app/types";
-import { SearchResult } from "@/app/types";
+import { ArtistProps } from "@/app/types";
+import { SearchResultProps } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 interface ArtAlbumResultsProps {
   key: string | number;
-  item: SearchResult | undefined;
+  item: SearchResultProps | undefined;
   cat: string;
 }
 
@@ -60,7 +60,7 @@ export default function ArtAlbumResults({
                 item.resultType !== "artist" && (
                   <div className="text-sm text-gray-400">
                     {item.artists.map(
-                      (artist: Artist, index: number) =>
+                      (artist: ArtistProps, index: number) =>
                         index < 3 && (
                           <span key={index}>
                             {artist.name}

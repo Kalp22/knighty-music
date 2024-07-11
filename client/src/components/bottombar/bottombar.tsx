@@ -2,13 +2,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useVideo } from "@/app/contexts/videoContext/videoContext";
 import { IoPlay, IoPlayBack, IoPlayForward, IoPause } from "react-icons/io5";
-import { StreamingData } from "@/app/types";
-
+import { StreamingDataProps } from "@/app/types";
 
 export default function Bottombar() {
   const [hoverToggle, setHovering] = useState(false);
   const { videoId } = useVideo();
-  const [stream, setStream] = useState<StreamingData | null>(null);
+  const [stream, setStream] = useState<StreamingDataProps | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -57,14 +56,14 @@ export default function Bottombar() {
     }
   };
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.load(); // Reload the audio element with the new stream URL
-      console.log("Reloading audio element with new stream URL");
-    } else {
-      console.log("Audio element not found");
-    }
-  }, [stream]);
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     audioRef.current.load(); // Reload the audio element with the new stream URL
+  //     console.log("Reloading audio element with new stream URL");
+  //   } else {
+  //     console.log("Audio element not found");
+  //   }
+  // }, [stream]);
 
   return (
     <footer className="flex flex-col justify-between fixed bottom-0 w-screen h-20 z-10 bg-black">
@@ -97,10 +96,10 @@ export default function Bottombar() {
             <IoPlayForward size={30} className="text-white" />
           </button>
         </div>
-        <audio ref={audioRef} autoPlay preload="none">
+        {/* <audio ref={audioRef} autoPlay preload="none">
           {stream && <source src={stream.url} type="audio/mpeg" />}
           Your browser does not support the audio element.
-        </audio>
+        </audio> */}
       </div>
     </footer>
   );
