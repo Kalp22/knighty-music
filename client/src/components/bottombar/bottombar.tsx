@@ -4,6 +4,7 @@ import { useVideo } from "@/app/contexts/videoContext/videoContext";
 import { IoPlay, IoPlayBack, IoPlayForward, IoPause } from "react-icons/io5";
 import { StreamingData } from "@/app/types";
 
+
 export default function Bottombar() {
   const [hoverToggle, setHovering] = useState(false);
   const { videoId } = useVideo();
